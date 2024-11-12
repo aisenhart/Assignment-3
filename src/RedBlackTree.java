@@ -1,15 +1,23 @@
-// File: RedBlackTree.java
+/**
+ * Enum representing the color of a node in the Red-Black Tree.
+ */
 enum Color {
     RED, BLACK;
 }
 
+/**
+ * Class representing a node in the Red-Black Tree.
+ */
 class Node<T extends Comparable<T>> {
-    T data;
-    Node<T> left;
-    Node<T> right;
-    Node<T> parent;
-    Color color;
+    T data;           // The data stored in the node
+    Node<T> left;     // The left child of the node
+    Node<T> right;    // The right child of the node
+    Node<T> parent;   // The parent of the node
+    Color color;      // The color of the node
 
+    /**
+     * Constructs a new node with the specified data.
+     */
     Node(T data) {
         this.data = data;
         this.color = Color.RED;
@@ -19,16 +27,25 @@ class Node<T extends Comparable<T>> {
     }
 }
 
+/**
+ * Class representing a Red-Black Tree.
+ */
 public class RedBlackTree<T extends Comparable<T>> {
-    private Node<T> root;
-    private final Node<T> TNULL; // Node for null references
+    private Node<T> root;      // The root of the Red-Black Tree
+    private final Node<T> TNULL; // Sentinel node for null references
 
+    /**
+     * Constructs a new Red-Black Tree.
+     */
     public RedBlackTree() {
         TNULL = new Node<>(null);
         TNULL.color = Color.BLACK;
         root = TNULL;
     }
 
+    /**
+     * Helper method for pre-order traversal of the tree.
+     */
     private void preOrderHelper(Node<T> node) {
         if (node != TNULL) {
             System.out.print(node.data + " ");
@@ -37,10 +54,16 @@ public class RedBlackTree<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * Performs a pre-order traversal of the tree.
+     */
     public void preOrder() {
         preOrderHelper(this.root);
     }
 
+    /**
+     * Helper method for in-order traversal of the tree.
+     */
     private void inOrderHelper(Node<T> node) {
         if (node != TNULL) {
             inOrderHelper(node.left);
@@ -49,10 +72,16 @@ public class RedBlackTree<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * Performs an in-order traversal of the tree.
+     */
     public void inorder() {
         inOrderHelper(this.root);
     }
 
+    /**
+     * Helper method for post-order traversal of the tree.
+     */
     private void postOrderHelper(Node<T> node) {
         if (node != TNULL) {
             postOrderHelper(node.left);
@@ -61,10 +90,16 @@ public class RedBlackTree<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * Performs a post-order traversal of the tree.
+     */
     public void postOrder() {
         postOrderHelper(this.root);
     }
 
+    /**
+     * Performs a left rotation on the specified node.
+     */
     private void leftRotate(Node<T> x) {
         Node<T> y = x.right;
         x.right = y.left;
@@ -83,6 +118,9 @@ public class RedBlackTree<T extends Comparable<T>> {
         x.parent = y;
     }
 
+    /**
+     * Performs a right rotation on the specified node.
+     */
     private void rightRotate(Node<T> x) {
         Node<T> y = x.left;
         x.left = y.right;
@@ -101,8 +139,15 @@ public class RedBlackTree<T extends Comparable<T>> {
         x.parent = y;
     }
 
+    /**
+     * Inserts a new node with the specified key into the Red-Black Tree.
+     */
     public void insert(T key) {
         Node<T> node = new Node<>(key);
+        if (search(((Product) node.data).getId()) != null) {
+            throw new IllegalArgumentException("Product with id " + ((Product) node.data).getId() + " already exists");
+        }
+
         node.parent = null;
         node.left = TNULL;
         node.right = TNULL;
@@ -141,6 +186,9 @@ public class RedBlackTree<T extends Comparable<T>> {
         fixInsert(node);
     }
 
+    /**
+     * Fixes the Red-Black Tree after an insertion to maintain its properties.
+     */
     private void fixInsert(Node<T> k) {
         Node<T> u;
         while (k.parent != null && k.parent.color == Color.RED) {
@@ -184,7 +232,35 @@ public class RedBlackTree<T extends Comparable<T>> {
         root.color = Color.BLACK;
     }
 
-    public void search(){
-
+    /**
+     * Searches for a product with the specified ID in the Red-Black Tree.
+     * Returns the product with the specified ID, or null if not found
+     */
+    public Product search(String productID) {
+        Node<T> temp = root;
+        while (temp != TNULL) {
+            if (productID.compareTo(((Product) temp.data).getId()) == 0) {
+                return (Product) temp.data;
+            }
+            if (productID.compareTo(((Product) temp.data).getId()) < 0) {
+                temp = temp.left;
+            } else {
+                temp = temp.right;
+            }
+        }
+        return null;
     }
+
+    public int size() {
+        return size(root);
+    }
+
+    private int size(Node<T> node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + size(node.left) + size(node.right);
+    }
+
+
 }
