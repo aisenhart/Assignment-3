@@ -9,11 +9,11 @@ enum Color {
  * Class representing a node in the Red-Black Tree.
  */
 class Node<T extends Comparable<T>> {
-    T data;           // The data stored in the node
-    Node<T> left;     // The left child of the node
-    Node<T> right;    // The right child of the node
-    Node<T> parent;   // The parent of the node
-    Color color;      // The color of the node
+    T data;
+    Node<T> left;
+    Node<T> right;
+    Node<T> parent;
+    Color color;
 
     /**
      * Constructs a new node with the specified data.
@@ -31,8 +31,8 @@ class Node<T extends Comparable<T>> {
  * Class representing a Red-Black Tree.
  */
 public class RedBlackTree<T extends Comparable<T>> {
-    private Node<T> root;      // The root of the Red-Black Tree
-    private final Node<T> TNULL; // Sentinel node for null references
+    private Node<T> root;
+    private final Node<T> TNULL;
 
     /**
      * Constructs a new Red-Black Tree.

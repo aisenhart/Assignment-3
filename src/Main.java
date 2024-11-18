@@ -9,35 +9,32 @@ public class Main {
     public static void main(String[] args) {
         RedBlackTree<Product> rbt = new RedBlackTree<>();
         List<Product> products = new ArrayList<>();
+        int insertionCount = 0;
 
         // Read product data from CSV file and insert into Red-Black Tree
         try (BufferedReader br = new BufferedReader(new FileReader("src/amazon-product-data.csv"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length == 4) {
-                    // Create product with category
-                    Product product = new Product(data[0], data[1], data[2], data[3]);
+                String id = data.length > 0 ? data[0] : "";
+                String name = data.length > 1 ? data[1] : "";
+                String category = data.length > 2 ? data[2] : "";
+                String price = data.length > 3 ? data[3] : "";
+
+                Product product = new Product(id, name, category, price);
+                if (rbt.search(id) != null) {
+                    System.out.println("Error: Product with ID " + id + " already exists. Skipping insertion.");
+                } else {
                     products.add(product);
-                    //Logging insertion process
-                    System.out.println("Inserting: " + product);
-                    rbt.insert(product);
-
-
-
-
-
-                } else if (data.length == 3) {
-                    // [Noticed some Products did not have category] Create product without category
-                    Product product = new Product(data[0], data[1], "", data[2]);
-                    products.add(product);
+                    // Logging insertion process
+                    System.out.println("Inserting #" + insertionCount + " " + product);
+                    insertionCount++;
                     rbt.insert(product);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -62,9 +59,13 @@ public class Main {
                 System.out.println("Type the product price you want to insert:");
                 String price = scanner.nextLine();
                 Product product = new Product(id, name, category, price);
-                rbt.insert(product);
-                products.add(product);
-                System.out.println("Product inserted: " + product);
+                if (rbt.search(id) != null) {
+                    System.out.println("Error: Product with ID " + id + " already exists. Skipping insertion.");
+                } else {
+                    rbt.insert(product);
+                    products.add(product);
+                    System.out.println("Product inserted: " + product);
+                }
             } else {
                 System.out.println("Invalid input");
             }
