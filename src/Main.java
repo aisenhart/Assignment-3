@@ -29,7 +29,10 @@ public class Main {
                     // Logging insertion process
                     System.out.println("Inserting #" + insertionCount + " " + product);
                     insertionCount++;
+                    long startTime = System.nanoTime();
                     rbt.insert(product);
+                    long endTime = System.nanoTime();
+                    System.out.println("Insertion time: " + (endTime - startTime) + " ns");
                 }
             }
         } catch (IOException e) {
@@ -43,12 +46,15 @@ public class Main {
             if (answer.equals("search")) {
                 System.out.println("Type the product id you want to search:");
                 String search = scanner.nextLine();
+                long startTime = System.nanoTime();
                 Product result = rbt.search(search);
+                long endTime = System.nanoTime();
                 if (result != null) {
                     System.out.println("Found: " + result);
                 } else {
                     System.out.println("Not found");
                 }
+                System.out.println("Search time: " + (endTime - startTime) + " ns");
             } else if (answer.equals("insert")) {
                 System.out.println("Type the product id you want to insert:");
                 String id = scanner.nextLine();
@@ -62,9 +68,12 @@ public class Main {
                 if (rbt.search(id) != null) {
                     System.out.println("Error: Product with ID " + id + " already exists. Skipping insertion.");
                 } else {
+                    long startTime = System.nanoTime();
                     rbt.insert(product);
+                    long endTime = System.nanoTime();
                     products.add(product);
                     System.out.println("Product inserted: " + product);
+                    System.out.println("Insertion time: " + (endTime - startTime) + " ns");
                 }
             } else {
                 System.out.println("Invalid input");
