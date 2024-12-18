@@ -1,60 +1,23 @@
-[SEARCH 1]
 Do you want to search or insert a product? (search/insert)
 search
 Type the product id you want to search:
 0678767f2ff24c5c2330ed0d4456c199
 Found: Product ID: 0678767f2ff24c5c2330ed0d4456c199, Name: "LEGO 8-Brick Storage Box, Category:  Bright Red", Price: Toys & Games | Building Toys
-
-[SEARCH 2]
-Do you want to search or insert again? (yes/no)
-yes
-Do you want to search or insert a product? (search/insert)
-search
-Type the product id you want to search:
-1a752c1e4fdfd09111c89ed29b92fd5c
-Found: Product ID: 1a752c1e4fdfd09111c89ed29b92fd5c, Name: "Vallejo Acrylic Paint, Category:  Track Primer", Price:
-
-[SEARCH 3]
-Do you want to search or insert again? (yes/no)
-yes
-Do you want to search or insert a product? (search/insert)
-search
-Type the product id you want to search:
-14e13b09adb60630d22f24dd9717810b
-Found: Product ID: 14e13b09adb60630d22f24dd9717810b, Name: Small World Toys Ryan's Room Wooden Toys -Matchimals (Matching Game), Category: Toys & Games | Puzzles, Price: $17.99
-
-[INSERT 1]
+Search time: 132583 ns
 Do you want to search or insert again? (yes/no)
 yes
 Do you want to search or insert a product? (search/insert)
 insert
 Type the product id you want to insert:
-14e13b09adb60630d22f24dd97178700
+0678767f2ff24c5c2330ed0d4456c121
 Type the product name you want to insert:
-Red Car
+Toy Car
 Type the product category you want to insert:
-Cars
+Toys
 Type the product price you want to insert:
-10
-Product inserted: Product ID: 14e13b09adb60630d22f24dd97178700, Name: Red Car, Category: Cars, Price: 10
-
-[INSERT 2](Edge case)
-Do you want to search or insert again? (yes/no)
-yes
-Do you want to search or insert a product? (search/insert)
-insert
-Type the product id you want to insert:
-7c8077382761095a9a6f17c010a5b31e
-Type the product name you want to insert:
-blue car
-Type the product category you want to insert:
-cars
-Type the product price you want to insert:
-10
-Error: Product with ID 7c8077382761095a9a6f17c010a5b31e already exists. Skipping insertion.
-
-
+100
+Product inserted: Product ID: 0678767f2ff24c5c2330ed0d4456c121, Name: Toy Car, Category: Toys, Price: 100
+Insertion time: 4041 ns
 Do you want to search or insert again? (yes/no)
 no
-
 Process finished with exit code 0
